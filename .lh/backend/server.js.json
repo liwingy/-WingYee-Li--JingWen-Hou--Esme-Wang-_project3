@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/server.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1732689039176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1732689039176,
+            "name": "Commit-0",
+            "content": "const express = require('express');\nconst cors = require('cors');\nconst connectDB = require('./db/connection');\nrequire('dotenv').config();\n\nconst userRoutes = require('./routes/userRoutes');\nconst postRoutes = require('./routes/postRoutes');\n\nif (!process.env.DB_URI) {\n    console.error('Error: DB_URI is not defined in .env file');\n    process.exit(1);\n}\n\nconst app = express();\napp.use(express.json());\napp.use(cors());\n\n// Routes\napp.use('/api/users', userRoutes);\napp.use('/api/posts', postRoutes);\n\n// Connect to MongoDB\nconnectDB();\n\n// Handle unknown routes\napp.use((req, res, next) => {\n    res.status(404).json({ error: 'Route not found' });\n});\n\n// Start the server\nconst PORT = process.env.PORT || 5000;\napp.listen(PORT, () => console.log(`Server running on port ${PORT}`));\n"
+        }
+    ]
+}
