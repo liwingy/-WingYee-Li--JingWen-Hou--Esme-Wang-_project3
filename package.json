@@ -8,8 +8,9 @@
     "frontend"
   ],
   "scripts": {
+    "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev": "concurrently \"npm run dev -w backend\" \"npm run dev -w frontend\" \"nodemon backend/server.js\"",
     "build": "npm run build -ws --if-present",
     "prod": "npm run start -w backend"
   },
@@ -23,9 +24,19 @@
     "url": "https://github.com/ajorgense1-chwy/cs5610_spr23_mod3/issues"
   },
   "homepage": "https://github.com/ajorgense1-chwy/cs5610_spr23_mod3#readme",
-  "dependencies": {
-  },
   "devDependencies": {
     "concurrently": "^8.0.1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.6",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "glob": "^11.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.3",
+    "rimraf": "^6.0.1"
   }
 }

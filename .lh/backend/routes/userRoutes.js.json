@@ -1,0 +1,30 @@
+{
+    "sourceFile": "backend/routes/userRoutes.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1733196338417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1733197865655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n const express = require('express');\n-const { registerUser, loginUser } = require('../controllers/userController');\n+const { register, login } = require('../controllers/userController');\n+\n const router = express.Router();\n \n-// Route to register a new user\n-router.post('/register', registerUser);\n+// User registration and login routes\n+router.post('/register', register);\n+router.post('/login', login);\n \n-// Route to authenticate a user and obtain a token\n-router.post('/login', loginUser);\n-\n-module.exports = router; // Export the router to be used in the main server file\n+module.exports = router;\n"
+                },
+                {
+                    "date": 1733204226295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+const express = require('express');\n+const {\n+  register,\n+  login,\n+  searchUsers,\n+  updateDescription,\n+  getUserDetails,\n+} = require('../controllers/userController'); // Import all required controllers\n+const authMiddleware = require('../middleware/auth'); // Import the authentication middleware\n+\n+const router = express.Router();\n+\n+// Define routes\n+router.post('/register', register); // Route for user registration\n+router.post('/login', login);       // Route for user login\n+\n+// Search for users\n+router.get('/search', searchUsers); // Route for searching users by username\n+\n+// Update user profile description (protected route)\n+router.put('/updateDescription', authMiddleware, updateDescription);\n+\n+// Get user details and posts\n+router.get('/:id', getUserDetails); // Route to fetch user details by ID\n+\n+module.exports = router;\n"
+                },
+                {
+                    "date": 1733206112784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,36 +1,22 @@\n const express = require('express');\n-const {\n-  register,\n-  login,\n-  searchUsers,\n-  updateDescription,\n-  getUserDetails,\n-} = require('../controllers/userController'); // Import all required controllers\n+const { register, login, searchUsers, updateDescription, getUserDetails } = require('../controllers/userController');\n const authMiddleware = require('../middleware/auth'); // Import the authentication middleware\n \n const router = express.Router();\n \n-// Define routes\n-router.post('/register', register); // Route for user registration\n-router.post('/login', login);       // Route for user login\n+// User-related routes\n+router.post('/register', register); // User registration\n+router.post('/login', login);       // User login\n \n-// Search for users\n-router.get('/search', searchUsers); // Route for searching users by username\n+router.get('/search', searchUsers); // Search for users\n+router.put('/updateDescription', authMiddleware, updateDescription); // Update profile description\n+router.get('/:id', getUserDetails); // Get user details\n \n-// Update user profile description (protected route)\n-router.put('/updateDescription', authMiddleware, updateDescription);\n+// Add logout route\n+router.post('/logout', (req, res) => {\n+  res.clearCookie('token') // Clear the authentication token\n+     .status(200)\n+     .json({ message: 'Logged out successfully' });\n+});\n \n-// Get user details and posts\n-router.get('/:id', getUserDetails); // Route to fetch user details by ID\n-\n module.exports = router;\n-const express = require('express');\n-const { register, login } = require('../controllers/userController');\n-\n-const router = express.Router();\n-\n-// User registration and login routes\n-router.post('/register', register);\n-router.post('/login', login);\n-\n-module.exports = router;\n"
+                }
+            ],
+            "date": 1733196338417,
+            "name": "Commit-0",
+            "content": "const express = require('express');\nconst { registerUser, loginUser } = require('../controllers/userController');\nconst router = express.Router();\n\n// Route to register a new user\nrouter.post('/register', registerUser);\n\n// Route to authenticate a user and obtain a token\nrouter.post('/login', loginUser);\n\nmodule.exports = router; // Export the router to be used in the main server file\n"
+        }
+    ]
+}

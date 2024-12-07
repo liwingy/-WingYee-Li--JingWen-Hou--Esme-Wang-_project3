@@ -1,0 +1,30 @@
+{
+    "sourceFile": "backend/models/User.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1733196338417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1733542039419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,19 @@\n const mongoose = require('mongoose');\n \n-/**\n- * Schema representing a user in the application.\n- */\n+// User schema definition\n const userSchema = new mongoose.Schema({\n-  username: { type: String, required: true, unique: true }, // User's unique username\n-  email: { type: String, required: true, unique: true },    // User's unique email address\n-  password: { type: String, required: true },               // Hashed password\n-}, { timestamps: true }); // Automatically add createdAt and updatedAt fields\n+  username: { type: String, required: true, unique: true }, // Unique username\n+  password: { type: String, required: true }, // Encrypted password\n+  description: { type: String, default: '' }, // Optional profile description\n+  joined: { type: Date, default: Date.now }, // Automatically set join date\n+});\n \n-module.exports = mongoose.model('User', userSchema); // Export the User model based on the schema\n+// Hash the password before saving to the database\n+userSchema.pre('save', async function (next) {\n+  if (!this.isModified('password')) return next(); // Only hash if the password is new/changed\n+  const salt = await bcrypt.genSalt(10);\n+  this.password = await bcrypt.hash(this.password, salt);\n+  next();\n+});\n+\n+module.exports = mongoose.model('User', userSchema);\n"
+                },
+                {
+                    "date": 1733542062470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,8 @@\n \n // Hash the password before saving to the database\n userSchema.pre('save', async function (next) {\n   if (!this.isModified('password')) return next(); // Only hash if the password is new/changed\n-  const salt = await bcrypt.genSalt(10);\n-  this.password = await bcrypt.hash(this.password, salt);\n   next();\n });\n \n module.exports = mongoose.model('User', userSchema);\n"
+                },
+                {
+                    "date": 1733542364644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,11 @@\n   description: { type: String, default: '' }, // Optional profile description\n   joined: { type: Date, default: Date.now }, // Automatically set join date\n });\n \n-// Hash the password before saving to the database\n+// saving to the database\n userSchema.pre('save', async function (next) {\n-  if (!this.isModified('password')) return next(); // Only hash if the password is new/changed\n+  if (!this.isModified('password')) return next(); \n   next();\n });\n \n module.exports = mongoose.model('User', userSchema);\n"
+                }
+            ],
+            "date": 1733196338417,
+            "name": "Commit-0",
+            "content": "const mongoose = require('mongoose');\n\n/**\n * Schema representing a user in the application.\n */\nconst userSchema = new mongoose.Schema({\n  username: { type: String, required: true, unique: true }, // User's unique username\n  email: { type: String, required: true, unique: true },    // User's unique email address\n  password: { type: String, required: true },               // Hashed password\n}, { timestamps: true }); // Automatically add createdAt and updatedAt fields\n\nmodule.exports = mongoose.model('User', userSchema); // Export the User model based on the schema\n"
+        }
+    ]
+}
