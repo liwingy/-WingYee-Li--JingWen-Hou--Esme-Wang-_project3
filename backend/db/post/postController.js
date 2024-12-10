@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+const Post = require('./Post');
 
 // Fetch all posts, sorted by newest first
 exports.getAllPosts = async (req, res) => {

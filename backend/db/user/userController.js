@@ -1,5 +1,5 @@
-const User = require('../models/User');
-const Post = require('../models/Post');
+const User = require('./User');
+const Post = require('../post/Post');
 const jwt = require('jsonwebtoken');
 
 // Register a new user and log them in

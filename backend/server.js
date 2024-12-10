@@ -19,7 +19,7 @@ app.use(cookieParser()); // Parse cookies
 
 // Enable CORS for frontend requests
 app.use(cors({
-  origin: 'http://your-frontend-url.com', // Replace with your frontend URL
+  origin: 'http://localhost:3000', // Replace with your frontend URL
   credentials: true,
 }));
 
@@ -39,5 +39,5 @@ app.use('/api/posts', postRoutes);
 app.use(errorHandler);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
