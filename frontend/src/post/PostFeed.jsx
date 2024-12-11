@@ -9,14 +9,19 @@ export const handleFetchPosts = async (setPosts, setMessage) => {
     });
     const result = await response.json();
     if (response.ok) {
-      const postsList = result.map((post) => ({
-        username: post.user.username || 'Unknown User', // 提取用户名
-        content: post.content, // 提取帖子内容
-        timestamp: new Date(post.timestamp).toLocaleString(), // 格式化时间
-      }));
-      setPosts(postsList);
+      if (result.length === 0) {
+        setPosts([]);
+      } else {
+        const postsList = result.map((post) => ({
+          _id: post._id,
+          username: post.user?.username || 'Unknown User',
+          content: post.content,
+          timestamp: new Date(post.timestamp).toLocaleString(),
+        }));
+        setPosts(postsList);
+      }
     } else {
-      setMessage(data.error || 'Failed to fetch posts.');
+      setMessage(result.error || 'Failed to fetch posts.');
     }
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -25,8 +30,13 @@ export const handleFetchPosts = async (setPosts, setMessage) => {
 };
 
 // create new post
-export const handlePost = async (newPost, setPosts, setMessage) => {
+export const handlePost = async (newPost, setMessage, setPosts, setNewPost) => {
   try {
+    if (!newPost.trim()) {
+      setMessage('Post content cannot be empty.');
+      return;
+    }
+
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -37,7 +47,17 @@ export const handlePost = async (newPost, setPosts, setMessage) => {
     const result = await response.json();
     if (response.ok) {
       setMessage('Post created successfully!');
-      setPosts((prevPosts) => [result.post, ...prevPosts]);
+      setPosts((prevPosts) => [
+        {
+          username: result.post.user?.username || 'Unknown User',
+          content: result.post.content,
+          timestamp: result.post.timestamp,
+          _id: result.post._id,
+        },
+        ...prevPosts,
+      ]);
+      setNewPost('');
+      await handleFetchPosts(setPosts, setMessage);
     } else {
       setMessage(result.error || 'Failed to create post.');
     }

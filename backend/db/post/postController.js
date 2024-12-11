@@ -6,11 +6,9 @@ exports.getAllPosts = async (req, res) => {
     const posts = await Post.find()
       .populate('user', 'username') // Populate 'user' field with username
       .sort({ timestamp: -1 }); // Sort posts by descending timestamp
-
     if (posts.length === 0) {
-      return res.status(404).json({ message: 'No posts available' });
+      return res.status(200).json([]);
     }
-
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error.message);
@@ -36,11 +34,11 @@ exports.createPost = async (req, res) => {
     });
 
     // Save the post to the database
-    await post.save();
-    const posts = await Post.find()
+    await newPost.save();
+    const populatedPost = await Post.find()
       .populate('user', 'username') // Populate user information
       .sort({ timestamp: -1 }); // Sort by newest first
-    res.status(201).json({ posts });
+    res.status(201).json({ post: populatedPost });
   } catch (error) {
     console.error('Error creating post:', error.message);
     res.status(500).json({ error: 'An error occurred while creating the post' });
