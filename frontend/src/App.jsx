@@ -1,8 +1,7 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
-import './app.css';
+import './App.css';
 
-// main page of the application, showing brief introduction
 const App = () => {
   return (
     <Container maxWidth="sm" className="app-container">
@@ -17,6 +16,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
