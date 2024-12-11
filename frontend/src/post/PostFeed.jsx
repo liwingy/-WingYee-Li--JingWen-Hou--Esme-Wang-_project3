@@ -67,3 +67,64 @@ export const handlePost = async (newPost, setMessage, setPosts, setNewPost) => {
   }
 };
 
+// delete post
+export const handleDeletePost = async (postId, setMessage, setPosts) => {
+  try {
+    if (!postId) {
+      setMessage('Invalid post ID.');
+      return;
+    }
+
+    const response = await fetch(`${API_URL}/${postId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      setMessage('Post deleted successfully!');
+      setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+    } else {
+      setMessage(result.error || 'Failed to delete post.');
+    }
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    setMessage('Network error while deleting post.');
+  }
+};
+
+// update post
+export const handleUpdatePost = async (postId, postContent, setMessage, setPosts) => {
+  try {
+    const newContent = prompt('Edit your post:', postContent);
+    if (newContent === null || !newContent.trim()) {
+      setMessage('Post content cannot be empty or unchanged.');
+      return;
+    }
+
+    const response = await fetch(`${API_URL}/${postId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: newContent }),
+      credentials: 'include',
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      setMessage('Post updated successfully!');
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === postId
+            ? { ...post, content: newContent, timestamp: new Date().toISOString() }
+            : post
+        )
+      );
+    } else {
+      setMessage(result.error || 'Failed to update post.');
+    }
+  } catch (error) {
+    console.error('Error updating post:', error);
+    setMessage('Network error while updating post.');
+  }
+};
+

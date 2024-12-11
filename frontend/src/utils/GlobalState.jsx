@@ -16,7 +16,7 @@ export const GlobalStateProvider = ({ children }) => {
     setUserInfo(null);
   };
 
-  // Fetch current user info when the app starts
+  // fetch current user info when the app starts
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -24,7 +24,7 @@ export const GlobalStateProvider = ({ children }) => {
         if (response.ok) {
           if (response.ok) {
             const users = await response.json();
-            const user = users[0]; // 取第一个用户
+            const user = users[0];
             handleLogin(user);
           }
         }

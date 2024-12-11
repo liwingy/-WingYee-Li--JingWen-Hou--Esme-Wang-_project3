@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 const API_URL = 'http://localhost:8000/api/users/register';
 
 // handle user input data
@@ -6,6 +8,7 @@ export const handleChange = (e, formData, setFormData) => {
   setFormData({ ...formData, [name]: value });
 };
 
+// handle new user registration
 export const handleSubmit = async (formData, handleLogin, navigate, setMessage) => {
   try {
     // Send backend register request
@@ -27,4 +30,10 @@ export const handleSubmit = async (formData, handleLogin, navigate, setMessage) 
     console.error('Error during registration:', error);
     setMessage('An unexpected error occurred. Please try again later.');
   }
+};
+
+// redirect url for app.jsx
+export const useRedirectRegister = () => {
+  const navigate = useNavigate();
+  return () => navigate('/register');
 };

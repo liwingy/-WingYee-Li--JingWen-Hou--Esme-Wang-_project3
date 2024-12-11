@@ -6,7 +6,7 @@ const NavBar = () => {
   const { isLoggedIn, userInfo, handleLogout } = useContext(GlobalStateContext);
 
   return (
-    <AppBar position="static" sx={{ background: '#1976d2' }}>
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           My Application

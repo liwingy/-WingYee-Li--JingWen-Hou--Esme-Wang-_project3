@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { handleFetchPosts, handlePost } from '../post/PostFeed';
+import { handleFetchPosts, handlePost, handleDeletePost, handleUpdatePost } from '../post/PostFeed';
 import { GlobalStateContext } from '../utils/GlobalState';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Card, CardContent, CardActions, Typography } from '@mui/material';
 import './Home.css';
 
 export default function Home() {
@@ -47,15 +47,34 @@ export default function Home() {
       {Array.isArray(posts) && posts.length === 0 ? (
         <p>No posts to display. Start by creating your first post!</p>
       ) : (
-        Array.isArray(posts) && (
-        <ul>
+        // show posts
+        <Box className="posts-container">
           {posts.map((post) => (
-            <li key={post._id}>
-              <p><strong>{post.username}:</strong> {post.content}</p>
-              <small>{new Date(post.timestamp).toLocaleString()}</small>
-            </li>
+            <Card key={post._id} className="post-card">
+              <CardContent>
+                <Typography variant="h6">
+                  <strong>{post.username}</strong>
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {post.content}
+                </Typography>
+                <Typography variant="caption" color="textSecondary">
+                  {new Date(post.timestamp).toLocaleString()}
+                </Typography>
+              </CardContent>
+              {post.username === userInfo?.username && (
+                <CardActions>
+                  <Button size="small" color="primary" onClick={() => handleUpdatePost(post._id, post.content, setMessage, setPosts)}>
+                    Edit
+                  </Button>
+                  <Button size="small" color="secondary" onClick={() => handleDeletePost(post._id, setMessage, setPosts)}>
+                    Delete
+                  </Button>
+                </CardActions>
+              )}
+            </Card>
           ))}
-        </ul>)
+      </Box>
       )}
     </div>
   );
