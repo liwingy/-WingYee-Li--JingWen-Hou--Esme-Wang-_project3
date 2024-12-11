@@ -22,7 +22,10 @@ exports.register = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
        .status(201)
-       .json({ message: 'User registered and logged in successfully' });
+       .json({
+        message: 'User registered and logged in successfully',
+        user: {id: user._id, username: user.username},
+      });
   } catch (error) {
     console.error('Error during registration:', error.message);
     res.status(500).json({ error: 'An error occurred while registering the user' });
@@ -64,7 +67,14 @@ exports.searchUsers = async (req, res) => {
     const query = req.query.q;
 
     if (!query) {
-      return res.status(400).json({ error: 'Search query is required' });
+      if (!req.user) {
+        return res.status(401).json({ error: 'User not authenticated' });
+      }
+      const user = await User.findById(req.user.id).select('username createdAt');
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      return res.status(200).json([user]);
     }
 
     const users = await User.find({
@@ -75,7 +85,7 @@ exports.searchUsers = async (req, res) => {
       return res.status(404).json({ message: 'No users found' });
     }
 
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
     console.error('Error searching users:', error.message);
     res.status(500).json({ error: 'An error occurred while searching users' });

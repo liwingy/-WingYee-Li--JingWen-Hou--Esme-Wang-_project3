@@ -29,7 +29,7 @@ exports.createPost = async (req, res) => {
     }
 
     // Create the post
-    const post = new Post({
+    const newPost = new Post({
       user: req.user.id, // Associate post with logged-in user
       content,
       timestamp: new Date(), // Add the current timestamp
@@ -37,11 +37,10 @@ exports.createPost = async (req, res) => {
 
     // Save the post to the database
     await post.save();
-
-    res.status(201).json({
-      message: 'Post created successfully',
-      post,
-    });
+    const posts = await Post.find()
+      .populate('user', 'username') // Populate user information
+      .sort({ timestamp: -1 }); // Sort by newest first
+    res.status(201).json({ posts });
   } catch (error) {
     console.error('Error creating post:', error.message);
     res.status(500).json({ error: 'An error occurred while creating the post' });

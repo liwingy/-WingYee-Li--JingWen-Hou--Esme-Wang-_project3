@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NavBar from './navbar/Navbar';
 
-export default function App() {
+const App = () => {
   return (
-    <div>
-      <h1>Welcome to the Application</h1>
-      <p>This is the main page. Navigate to the Signup page to create an account.</p>
-      <a href="/register">Go to register</a>
-    </div>
+    <>
+      {/* 渲染导航栏 */}
+      <NavBar />
+      {/* 欢迎信息 */}
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <h1>Welcome to the Application</h1>
+        <p>Please log in or sign up to continue.</p>
+      </div>
+    </>
   );
-}
+};
+
+export default App;
+
+
+

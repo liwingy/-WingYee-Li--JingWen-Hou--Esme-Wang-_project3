@@ -3,29 +3,39 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Register from './pages/Register';
+import Login from './pages/Login';
 import Home from './pages/Home';
+import NavBar from './navbar/Navbar';
+import { GlobalStateProvider } from './utils/GlobalState';
 
 const router = createBrowserRouter([
   {
-    // url for application home page
     path: '/',
-    element: <App />,
+    element: 
+    <><NavBar /><App /></>
   },
   {
-    // url for frontend user sign-up
     path: '/register',
-    element: <Register />,
+    element: 
+    <><NavBar /><Register /></>
   },
   {
-    // url for user homepage
+    path: '/login',
+    element: 
+    <><NavBar /><Login /></>
+  },
+  {
     path: '/home',
-    element: <Home />,
+    element: 
+    <><NavBar /><Home /></>
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <GlobalStateProvider>
     <RouterProvider router={router} />
+    </GlobalStateProvider>
   </React.StrictMode>
 );
 

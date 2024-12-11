@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const authenticateUser = require('./middleware/auth');
 require('dotenv').config();
 
 const app = express();
@@ -32,8 +33,8 @@ const apiLimiter = rateLimit({
 app.use('/api/', apiLimiter); // Apply rate limiter to all API routes
 
 // Routes
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
+app.use('/api/users', authenticateUser, userRoutes);
+app.use('/api/posts',authenticateUser, postRoutes);
 
 // Error Handler (must be after routes)
 app.use(errorHandler);
