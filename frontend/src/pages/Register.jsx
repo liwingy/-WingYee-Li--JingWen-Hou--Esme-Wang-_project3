@@ -2,6 +2,7 @@ import React, { useState , useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalStateContext } from '../utils/GlobalState';
 import { handleChange, handleSubmit } from '../user/userRegister';
+import './Register.css';
 
 export default function Register() {
   const [formData, setFormData] = useState({

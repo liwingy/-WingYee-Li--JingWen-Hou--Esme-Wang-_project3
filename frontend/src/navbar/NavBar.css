@@ -1,4 +1,82 @@
 .navbar {
-    background-color: #1976d2; /* Same as AppBar background */
-    color: #fff; /* White text for contrast */
+  background: linear-gradient(90deg, #fff6d4, #ffe4e4) !important; /* Light yellow to light pink gradient */
+  color: #4d4d4d; /* Soft dark gray for text contrast */
+  padding: 10px 20px; /* Add padding for spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.navbar .navbar-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  color: #ff89a1; /* Baby pink for logo text */
+  cursor: pointer;
+  margin-right: auto;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for hover */
+}
+
+.navbar .navbar-logo:hover {
+  color: #ffc800; /* Change to baby yellow on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.navbar .navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .navbar-links button {
+  margin-left: 15px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4d4d4d; /* Soft dark gray */
+  background-color: #fffbe6; /* Light yellow background */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .navbar-links button:hover {
+  background-color: #ffe0f0; /* Light pink on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px); /* Hover lifts the button slightly */
+}
+
+.navbar .navbar-links .navbar-username {
+  margin-right: 15px;
+  color: #ff89a1; /* Baby pink for username */
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navbar .navbar-links .navbar-username:hover {
+  color: #ffc800; /* Baby yellow on hover */
+}
+
+.navbar .navbar-links button:active {
+  background-color: #ffccd5; /* Slightly darker pink for active state */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for active state */
+  transform: translateY(2px); /* Button pressed down */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 10px;
   }
+
+  .navbar .navbar-logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar .navbar-links button {
+    margin: 10px 0;
+    width: 100%; /* Full width buttons on small screens */
+    text-align: center;
+  }
+}
