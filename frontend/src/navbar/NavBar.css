@@ -1,53 +1,66 @@
 .navbar {
   background: linear-gradient(90deg, #fff6d4, #ffe4e4) !important; /* Light yellow to light pink gradient */
   color: #4d4d4d; /* Soft dark gray for text contrast */
-  padding: 10px 20px; /* Add padding for spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border-radius: 8px; /* Rounded corners */
+  padding: 12px 24px; /* Add more padding for spacing */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow for better visibility */
+  border-radius: 10px; /* Softer rounded corners */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Evenly space logo and links */
 }
 
 .navbar .navbar-logo {
-  font-size: 1.8rem;
+  font-size: 2rem; /* Larger logo for better visibility */
   font-weight: bold;
   font-family: 'Arial', sans-serif;
   color: #ff89a1; /* Baby pink for logo text */
   cursor: pointer;
-  margin-right: auto;
   transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for hover */
+  margin-right: auto;
 }
 
 .navbar .navbar-logo:hover {
   color: #ffc800; /* Change to baby yellow on hover */
-  transform: scale(1.1); /* Slight zoom effect */
+  transform: scale(1.15); /* More pronounced zoom effect */
 }
 
 .navbar .navbar-links {
   display: flex;
   align-items: center;
+  gap: 20px; /* Add consistent spacing between buttons */
 }
 
 .navbar .navbar-links button {
-  margin-left: 15px;
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 10px 20px; /* Increase button padding */
+  font-size: 16px; /* Slightly larger text for better readability */
   font-weight: 600;
-  color: #4d4d4d; /* Soft dark gray */
+  color: #4d4d4d; /* Soft dark gray text */
   background-color: #fffbe6; /* Light yellow background */
-  border: none;
-  border-radius: 6px;
+  border: 2px solid transparent; /* Add border for focus effect */
+  border-radius: 8px; /* More rounded buttons */
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .navbar .navbar-links button:hover {
   background-color: #ffe0f0; /* Light pink on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px); /* Hover lifts the button slightly */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for hover */
+  transform: translateY(-3px); /* Lift button slightly on hover */
+}
+
+.navbar .navbar-links button:focus {
+  border-color: #ffc800; /* Baby yellow border on focus */
+  outline: none; /* Remove default outline */
+}
+
+.navbar .navbar-links button:active {
+  background-color: #ffccd5; /* Slightly darker pink for active state */
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2); /* Inner shadow for active state */
+  transform: translateY(2px); /* Button pressed down effect */
 }
 
 .navbar .navbar-links .navbar-username {
-  margin-right: 15px;
   color: #ff89a1; /* Baby pink for username */
   font-weight: 700;
   cursor: pointer;
@@ -58,25 +71,27 @@
   color: #ffc800; /* Baby yellow on hover */
 }
 
-.navbar .navbar-links button:active {
-  background-color: #ffccd5; /* Slightly darker pink for active state */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for active state */
-  transform: translateY(2px); /* Button pressed down */
-}
-
 @media (max-width: 768px) {
   .navbar {
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
     padding: 10px;
+    justify-content: center; /* Center content on small screens */
   }
 
   .navbar .navbar-logo {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Adjust logo size for smaller screens */
+  }
+
+  .navbar .navbar-links {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+    gap: 10px; /* Adjust spacing for vertical layout */
   }
 
   .navbar .navbar-links button {
-    margin: 10px 0;
     width: 100%; /* Full width buttons on small screens */
     text-align: center;
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+    font-size: 14px; /* Adjust font size */
   }
 }

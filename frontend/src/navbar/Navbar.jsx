@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { GlobalStateContext } from '../utils/GlobalState';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -35,51 +34,38 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        {/* Application name linked to the home page */}
-        <Typography
-          variant="h6"
-          sx={{ flexGrow: 1, cursor: 'pointer' }}
-          onClick={() => (window.location.href = '/')}
-        >
-          Bluesky Application
-        </Typography>
-
-        {/* Dynamic navigation buttons based on user login state */}
+    <div className="navbar">
+      <div className="navbar-logo" onClick={() => (window.location.href = '/')}>
+        Bluesky Application
+      </div>
+      <div className="navbar-links">
         {isLoggedIn ? (
-          <Box display="flex" alignItems="center">
-            {/* Home button */}
-            <Button color="inherit" onClick={() => (window.location.href = '/')}>
+          <>
+            <button className="navbar-button" onClick={() => (window.location.href = '/')}>
               Home
-            </Button>
-            {/* Link to the user's profile page */}
-            <Button color="inherit" onClick={handleProfileClick}>
+            </button>
+            <button className="navbar-button" onClick={handleProfileClick}>
               Profile
-            </Button>
-            {/* Logout button */}
-            <Button color="inherit" onClick={handleLogout}>
+            </button>
+            <button className="navbar-button" onClick={handleLogout}>
               Logout
-            </Button>
-          </Box>
+            </button>
+          </>
         ) : (
-          <Box>
-            {/* Home button */}
-            <Button color="inherit" onClick={() => (window.location.href = '/')}>
+          <>
+            <button className="navbar-button" onClick={() => (window.location.href = '/')}>
               Home
-            </Button>
-            {/* Login button */}
-            <Button color="inherit" href="/login">
+            </button>
+            <button className="navbar-button" onClick={() => (window.location.href = '/login')}>
               Login
-            </Button>
-            {/* Sign Up button */}
-            <Button color="inherit" href="/register">
+            </button>
+            <button className="navbar-button" onClick={() => (window.location.href = '/register')}>
               Sign Up
-            </Button>
-          </Box>
+            </button>
+          </>
         )}
-      </Toolbar>
-    </AppBar>
+      </div>
+    </div>
   );
 };
 

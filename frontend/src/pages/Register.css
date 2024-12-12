@@ -1,83 +1,87 @@
-/* Container for Register Form */
-.register-form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 24px;
-    box-sizing: border-box;
-    background: linear-gradient(145deg, #ffe4e4, #fff6d4);
-    border: 1px solid #ffd1dc;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(255, 182, 193, 0.3);
-  }
-  
-  /* Register Form Title */
-  .register-form-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #ffc800;
-    text-align: center;
-    margin-bottom: 16px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Register Input Fields */
-  .register-input-field {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ffc0cb;
-    background-color: #fffaf0;
-    font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .register-input-field:focus {
-    border-color: #ffc800;
-    box-shadow: 0 0 10px rgba(255, 223, 100, 0.5);
-    outline: none;
-  }
-  
-  /* Register Button */
-  .register-submit-button {
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(145deg, #ffc800, #ffe4e4);
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
-  }
-  
-  .register-submit-button:hover {
-    background: linear-gradient(145deg, #ffd700, #ffc0cb);
-    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
-    transform: scale(1.05);
-  }
-  
-  .register-submit-button:active {
-    transform: translateY(2px);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Register Links */
-  .register-link-container {
-    margin-top: 16px;
-    text-align: center;
-  }
-  
-  .register-link-container a {
-    color: #ffc800;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  .register-link-container a:hover {
-    color: #ff6f91;
-  }
+/* Main Container for Register */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full-page height */
+  background: linear-gradient(145deg, #ffe4e4, #fff6d4); /* Gradient background */
+  padding: 2rem;
+}
+
+/* Register Title */
+.register-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffc800;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Form Container */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Consistent spacing between inputs */
+  width: 100%;
+  max-width: 400px; /* Limit form width */
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(255, 182, 193, 0.3);
+}
+
+/* Input Fields */
+.register-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ffc0cb;
+  background-color: #fffaf0;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.register-input:focus {
+  border-color: #ffc800;
+  box-shadow: 0 0 10px rgba(255, 223, 100, 0.5);
+  outline: none;
+}
+
+/* Submit Button */
+.register-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(145deg, #ffc800, #ffe4e4);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.register-button:hover {
+  background: linear-gradient(145deg, #ffd700, #ffc0cb);
+  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+  transform: scale(1.05);
+}
+
+.register-button:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
