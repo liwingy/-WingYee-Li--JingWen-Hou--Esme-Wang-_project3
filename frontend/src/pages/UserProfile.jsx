@@ -12,6 +12,7 @@ export default function UserProfile() {
 
   // Fetch user details and posts
   useEffect(() => {
+    console.log('User Profile ID:', id);
     const fetchUserDetails = async () => {
       try {
         const res = await fetch(`/api/users/${id}`);
