@@ -4,7 +4,7 @@ const Post = require('./Post');
 exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate('user', 'username') // Populate 'user' field with username
+      .populate('user', 'username _id') // Populate 'user' field with username
       .sort({ timestamp: -1 }); // Sort posts by descending timestamp
     if (posts.length === 0) {
       return res.status(200).json([]);
@@ -36,7 +36,7 @@ exports.createPost = async (req, res) => {
     // Save the post to the database
     await newPost.save();
     const populatedPost = await Post.find()
-      .populate('user', 'username') // Populate user information
+      .populate('user', 'username _id') // Populate user information
       .sort({ timestamp: -1 }); // Sort by newest first
     res.status(201).json({ post: populatedPost });
   } catch (error) {
