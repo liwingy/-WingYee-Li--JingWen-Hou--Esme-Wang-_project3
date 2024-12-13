@@ -19,7 +19,7 @@ app.use(cookieParser()); // Parse cookies
 
 // Enable CORS for frontend requests
 app.use(cors({
-  origin: ['http://localhost:3000' , 'https://wingyeeli-jingwenhou-esmewangproject3.onrender.com' , 'https://wjeproject3.onrender.com'],// Replace with your frontend URL
+  origin: ['http://localhost:3000' , 'https://wjeproject3.onrender.com'],// Replace with your frontend URL
   credentials: true,
 }));
 
