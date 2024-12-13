@@ -28,11 +28,11 @@ export default function Home() {
     <div>
       <div className="header">
         <h1>Welcome, {userInfo?.username || 'Guest'}!</h1>
-        {isLoggedIn && (
+        {/* isLoggedIn && (
           <button className="logout-button" onClick={handleLogout}>
             Logout
           </button>
-        )}
+        )}*/}
       </div>
       {isLoggedIn && (
         <form className="form-container" onSubmit={handleSubmitPost}>
