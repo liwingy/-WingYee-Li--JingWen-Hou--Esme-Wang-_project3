@@ -1,0 +1,26 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1733191213691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1733191219408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     \"frontend\"\n   ],\n   \"scripts\": {\n     \"start\": \"node server.js\",\n-    \"dev\": \"nodemon server.js\"\n+    \"dev\": \"nodemon server.js\",\n     \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n     \"dev\": \"concurrently \\\"npm run dev -w backend\\\" \\\"npm run dev -w frontend\\\"\",\n     \"build\": \"npm run build -ws --if-present\",\n     \"prod\": \"npm run start -w backend\"\n"
+                },
+                {
+                    "date": 1733191523964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,11 @@\n     \"backend\",\n     \"frontend\"\n   ],\n   \"scripts\": {\n-    \"start\": \"node server.js\",\n-    \"dev\": \"nodemon server.js\",\n+    \"start\": \"node backend/server.js\",\n     \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n-    \"dev\": \"concurrently \\\"npm run dev -w backend\\\" \\\"npm run dev -w frontend\\\"\",\n+    \"dev\": \"concurrently \\\"npm run dev -w backend\\\" \\\"npm run dev -w frontend\\\" \\\"nodemon backend/server.js\\\"\",\n     \"build\": \"npm run build -ws --if-present\",\n     \"prod\": \"npm run start -w backend\"\n   },\n   \"repository\": {\n"
+                }
+            ],
+            "date": 1733191213691,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"cs5610_spr23_mod3\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"workspaces\": [\n    \"backend\",\n    \"frontend\"\n  ],\n  \"scripts\": {\n    \"start\": \"node server.js\",\n    \"dev\": \"nodemon server.js\"\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n    \"dev\": \"concurrently \\\"npm run dev -w backend\\\" \\\"npm run dev -w frontend\\\"\",\n    \"build\": \"npm run build -ws --if-present\",\n    \"prod\": \"npm run start -w backend\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/ajorgense1-chwy/cs5610_spr23_mod3.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/ajorgense1-chwy/cs5610_spr23_mod3/issues\"\n  },\n  \"homepage\": \"https://github.com/ajorgense1-chwy/cs5610_spr23_mod3#readme\",\n  \"devDependencies\": {\n    \"concurrently\": \"^8.0.1\"\n  },\n  \"keywords\": [],\n  \"dependencies\": {\n    \"bcrypt\": \"^5.1.1\",\n    \"cors\": \"^2.8.5\",\n    \"dotenv\": \"^16.4.6\",\n    \"express\": \"^4.21.1\",\n    \"glob\": \"^11.0.0\",\n    \"jsonwebtoken\": \"^9.0.2\",\n    \"mongoose\": \"^8.8.3\",\n    \"rimraf\": \"^6.0.1\"\n  }\n}\n"
+        }
+    ]
+}

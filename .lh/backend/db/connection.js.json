@@ -1,0 +1,34 @@
+{
+    "sourceFile": "backend/db/connection.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1733196338417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1733197655157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,18 @@\n const mongoose = require('mongoose');\n-require('dotenv').config(); // Load environment variables from .env file\n+require('dotenv').config();\n \n-/**\n- * Connect to MongoDB database.\n- */\n+// Connect to MongoDB using environment variable\n const connectDB = async () => {\n-    try {\n-        // Attempt to connect to the database using the connection string from environment variables\n-        await mongoose.connect(process.env.DB_URI, {\n-            useNewUrlParser: true,\n-            useUnifiedTopology: true,\n-        });\n-        console.log('MongoDB Connected Successfully');\n-    } catch (error) {\n-        // Log any errors that occur during connection and exit the process\n-        console.error('Error connecting to MongoDB:', error.message);\n-        process.exit(1);\n-    }\n+  try {\n+    await mongoose.connect(process.env.MONGO_URI, {\n+      useNewUrlParser: true, // Prevent deprecated MongoDB warnings\n+      useUnifiedTopology: true,\n+    });\n+    console.log('MongoDB connected successfully');\n+  } catch (err) {\n+    console.error('Database connection error:', err);\n+    process.exit(1); // Exit if the connection fails\n+  }\n };\n \n-module.exports = connectDB; // Export the connection function for use in other parts of the application\n+module.exports = connectDB;\n"
+                },
+                {
+                    "date": 1733198591186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,17 @@\n const mongoose = require('mongoose');\n require('dotenv').config();\n \n-// Connect to MongoDB using environment variable\n const connectDB = async () => {\n   try {\n     await mongoose.connect(process.env.MONGO_URI, {\n-      useNewUrlParser: true, // Prevent deprecated MongoDB warnings\n+      useNewUrlParser: true,\n       useUnifiedTopology: true,\n     });\n-    console.log('MongoDB connected successfully');\n+    console.log('MongoDB connected successfully!');\n   } catch (err) {\n-    console.error('Database connection error:', err);\n-    process.exit(1); // Exit if the connection fails\n+    console.error('Database connection error:', err.message);\n+    process.exit(1); // Exit the app if the database connection fails\n   }\n };\n \n module.exports = connectDB;\n"
+                },
+                {
+                    "date": 1733198718623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,16 +2,17 @@\n require('dotenv').config();\n \n const connectDB = async () => {\n   try {\n+    console.log(`Connecting to database at: ${process.env.MONGO_URI}`);\n     await mongoose.connect(process.env.MONGO_URI, {\n       useNewUrlParser: true,\n       useUnifiedTopology: true,\n     });\n     console.log('MongoDB connected successfully!');\n   } catch (err) {\n-    console.error('Database connection error:', err.message);\n-    process.exit(1); // Exit the app if the database connection fails\n+    console.error('Database connection error:', err.message); // Log error details\n+    process.exit(1); // Exit if unable to connect\n   }\n };\n \n module.exports = connectDB;\n"
+                },
+                {
+                    "date": 1733201321471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     await mongoose.connect(process.env.MONGO_URI, {\n       useNewUrlParser: true,\n       useUnifiedTopology: true,\n     });\n+    console.log('MongoDB URI:', process.env.MONGO_URI);\n     console.log('MongoDB connected successfully!');\n   } catch (err) {\n     console.error('Database connection error:', err.message); // Log error details\n     process.exit(1); // Exit if unable to connect\n"
+                }
+            ],
+            "date": 1733196338417,
+            "name": "Commit-0",
+            "content": "const mongoose = require('mongoose');\nrequire('dotenv').config(); // Load environment variables from .env file\n\n/**\n * Connect to MongoDB database.\n */\nconst connectDB = async () => {\n    try {\n        // Attempt to connect to the database using the connection string from environment variables\n        await mongoose.connect(process.env.DB_URI, {\n            useNewUrlParser: true,\n            useUnifiedTopology: true,\n        });\n        console.log('MongoDB Connected Successfully');\n    } catch (error) {\n        // Log any errors that occur during connection and exit the process\n        console.error('Error connecting to MongoDB:', error.message);\n        process.exit(1);\n    }\n};\n\nmodule.exports = connectDB; // Export the connection function for use in other parts of the application\n"
+        }
+    ]
+}

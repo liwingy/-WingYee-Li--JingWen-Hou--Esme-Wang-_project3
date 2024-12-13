@@ -1,32 +1,43 @@
 const express = require('express');
-const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./db/connection');
-require('dotenv').config();
-
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
-
-if (!process.env.DB_URI) {
-    console.error('Error: DB_URI is not defined in .env file');
-    process.exit(1);
-}
+const errorHandler = require('./middleware/errorHandler');
+require('dotenv').config();
 
 const app = express();
-app.use(express.json());
-app.use(cors());
+
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(express.json()); // Parse JSON
+app.use(cookieParser()); // Parse cookies
+
+// Enable CORS for frontend requests
+app.use(cors({
+  origin: 'http://localhost:3000', // Replace with your frontend URL
+  credentials: true,
+}));
+
+// Rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests
+  message: 'Too many requests from this IP, please try again later.',
+});
+app.use('/api/', apiLimiter); // Apply rate limiter to all API routes
 
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 
-// Connect to MongoDB
-connectDB();
-
-// Handle unknown routes
-app.use((req, res, next) => {
-    res.status(404).json({ error: 'Route not found' });
-});
+// Error Handler (must be after routes)
+app.use(errorHandler);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
