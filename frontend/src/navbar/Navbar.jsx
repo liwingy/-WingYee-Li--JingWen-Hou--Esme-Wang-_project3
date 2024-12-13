@@ -5,20 +5,18 @@ import './NavBar.css';
 const NavBar = () => {
   const { isLoggedIn, userInfo, setIsLoggedIn, setUserInfo, handleLogout: globalHandleLogout } = useContext(GlobalStateContext);
 
-  // Local logout functionality
   const localHandleLogout = async () => {
     try {
       const res = await fetch('/api/users/logout', {
         method: 'POST',
-        credentials: 'include', // Ensure cookies are included
+        credentials: 'include',
       });
 
       if (res.ok) {
-        console.log('Logout successful. Clearing state.');
-        globalHandleLogout(); // Call global logout handler
-        setIsLoggedIn(false); // Clear login status
-        setUserInfo(null); // Clear user info
-        window.location.href = '/'; // Redirect to homepage
+        globalHandleLogout();
+        setIsLoggedIn(false);
+        setUserInfo(null);
+        window.location.href = '/';
       } else {
         const errorData = await res.json();
         console.error('Logout failed with response:', errorData);
@@ -28,13 +26,19 @@ const NavBar = () => {
     }
   };
 
-  // Handle profile navigation
   const handleProfileClick = () => {
-    if (userInfo?.id) {
-      console.log('Navigating to profile page for user ID:', userInfo.id);
-      window.location.href = `/user/${userInfo.id}`;
+    if (userInfo && userInfo?._id) {
+      window.location.href = `/user/${userInfo._id}`;
     } else {
       console.error('Profile navigation failed. User info is missing:', userInfo);
+    }
+  };
+
+  const handleHomeClick = () => {
+    if (isLoggedIn) {
+      window.location.href = '/home';
+    } else {
+      window.location.href = '/';
     }
   };
 
@@ -46,7 +50,7 @@ const NavBar = () => {
       <div className="navbar-links">
         {isLoggedIn ? (
           <>
-            <button className="navbar-button" onClick={() => (window.location.href = '/')}>
+            <button className="navbar-button" onClick={handleHomeClick}>
               Home
             </button>
             <button className="navbar-button" onClick={handleProfileClick}>
@@ -58,7 +62,7 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <button className="navbar-button" onClick={() => (window.location.href = '/')}>
+            <button className="navbar-button" onClick={handleHomeClick}>
               Home
             </button>
             <button className="navbar-button" onClick={() => (window.location.href = '/login')}>

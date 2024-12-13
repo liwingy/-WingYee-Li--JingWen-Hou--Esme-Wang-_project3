@@ -5,6 +5,7 @@ export const GlobalStateContext = createContext();
 export const GlobalStateProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleLogin = (user) => {
     setIsLoggedIn(true);
