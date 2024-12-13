@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:8000/api/users/register';
+const API_URL = 'https://wjeproject3.onrender.com/api/users/register';
 
 // handle user input data
 export const handleChange = (e, formData, setFormData) => {
