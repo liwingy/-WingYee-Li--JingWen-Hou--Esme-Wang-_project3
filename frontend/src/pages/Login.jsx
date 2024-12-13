@@ -18,6 +18,8 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
+        setIsLoggedIn(true);
+        setUserInfo(data.user);
         alert('Login successful!');
         window.location.href = '/home';
       } else {
