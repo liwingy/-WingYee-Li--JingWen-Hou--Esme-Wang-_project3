@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/api/posts';
+const API_URL = 'https://wjeproject3.onrender.com/api/posts';
 
 // fetch all posts
 export const handleFetchPosts = async (setPosts, setMessage) => {
