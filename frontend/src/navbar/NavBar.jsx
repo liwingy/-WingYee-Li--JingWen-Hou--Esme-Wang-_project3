@@ -5,6 +5,31 @@ import './NavBar.css';
 const NavBar = () => {
   const { isLoggedIn, userInfo, setIsLoggedIn, setUserInfo, handleLogout: globalHandleLogout } = useContext(GlobalStateContext);
 
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const res = await fetch('/api/users/search', { method: 'GET', credentials: 'include' });
+        if (res.ok) {
+          const user = await res.json();
+          if (user && user[0]) {
+            setIsLoggedIn(true);
+            setUserInfo(user[0]);
+          }
+        } else {
+          setIsLoggedIn(false);
+          setUserInfo(null);
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+        setIsLoggedIn(false);
+        setUserInfo(null);
+      }
+    };
+
+    fetchUserInfo();
+  }, [setIsLoggedIn, setUserInfo]);
+  
   const localHandleLogout = async () => {
     try {
       const res = await fetch('/api/users/logout', {
