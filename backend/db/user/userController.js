@@ -116,19 +116,21 @@ exports.updateDescription = async (req, res) => {
 // Get user details and posts
 exports.getUserDetails = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const { id } = req.params;
 
-    const user = await User.findById(userId).select('username createdAt description');
+    const [user, posts] = await Promise.all([
+      User.findById(id).select('username createdAt description'),
+      Post.find({ user: id }).sort({ timestamp: -1 }),
+    ]);
+
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found.' });
     }
 
-    const posts = await Post.find({ user: userId }).sort({ timestamp: -1 });
-
-    res.json({ user, posts });
+    res.status(200).json({ user, posts });
   } catch (error) {
     console.error('Error fetching user details:', error.message);
-    res.status(500).json({ error: 'An error occurred while fetching user details' });
+    res.status(500).json({ error: 'An error occurred while fetching user details.' });
   }
 };
 
