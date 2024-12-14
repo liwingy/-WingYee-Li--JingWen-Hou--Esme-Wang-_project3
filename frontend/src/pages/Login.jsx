@@ -34,7 +34,7 @@ const Login = () => {
       if (response.ok) {
         handleLogin(data.user); 
         alert('Login successful!');
-        navigate('/home'); 
+        window.location.href = '/home';
       } else {
         setError(data.error || 'Invalid username or password');
       }
