@@ -21,7 +21,7 @@ export const GlobalStateProvider = ({ children }) => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/users/search', { credentials: 'include' });
+        const response = await fetch('https://wjeproject3.onrender.com/api/users/search', { credentials: 'include' });
         if (response.ok) {
           if (response.ok) {
             const users = await response.json();
