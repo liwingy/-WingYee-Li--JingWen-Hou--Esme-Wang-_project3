@@ -33,8 +33,6 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         handleLogin(data.user); 
-        setIsLoggedIn(true);
-        setUserInfo(data.user);
         alert('Login successful!');
         navigate('/home'); 
       } else {
