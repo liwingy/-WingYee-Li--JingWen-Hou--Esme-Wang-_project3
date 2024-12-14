@@ -68,7 +68,7 @@ const NavBar = () => {
     if (isLoggedIn) {
       window.location.href = '/home';
     } else {
-      window.location.href = '/guest-home';
+      window.location.href = '/home';
     }
   };
 
