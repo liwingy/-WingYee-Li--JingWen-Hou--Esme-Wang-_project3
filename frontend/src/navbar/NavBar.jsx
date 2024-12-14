@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GlobalStateContext } from '../utils/GlobalState';
 import './NavBar.css';
 
 const NavBar = () => {
-  const { isLoggedIn, userInfo, setIsLoggedIn, setUserInfo, handleLogout: globalHandleLogout } = useContext(GlobalStateContext);
-
+  const {
+    isLoggedIn,
+    userInfo,
+    setIsLoggedIn,
+    setUserInfo,
+    handleLogout: globalHandleLogout,
+  } = useContext(GlobalStateContext);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -28,8 +33,8 @@ const NavBar = () => {
     };
 
     fetchUserInfo();
-  }, [setIsLoggedIn, setUserInfo]);
-  
+  }, [setIsLoggedIn, setUserInfo]); 
+
   const localHandleLogout = async () => {
     try {
       const res = await fetch('/api/users/logout', {
@@ -75,6 +80,7 @@ const NavBar = () => {
       <div className="navbar-links">
         {isLoggedIn ? (
           <>
+            <span className="navbar-welcome">Welcome, {userInfo?.username || 'Guest'}!</span>
             <button className="navbar-button" onClick={handleHomeClick}>
               Home
             </button>
