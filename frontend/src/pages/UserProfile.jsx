@@ -12,21 +12,26 @@ export default function UserProfile() {
 
   // Fetch user details and posts
   useEffect(() => {
-    console.log('User Profile ID:', id);
-    const fetchUserDetails = async () => {
-      try {
-        const res = await fetch(`/api/users/${id}`);
-        if (!res.ok) throw new Error(`Error fetching user details: ${res.status}`);
-        const data = await res.json();
-        setUserDetails(data.user);
-        setUserPosts(data.posts);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch(`/api/users/${id}`, { credentials: 'include' });
+      const data = await response.json();
 
-    fetchUserDetails();
-  }, [id]);
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch user details.');
+      }
+
+      setUserDetails(data.user);
+      setUserPosts(data.posts);
+    } catch (error) {
+      console.error('Error fetching user details:', error.message);
+      setUserDetails(null);
+      setUserPosts([]);
+    }
+  };
+
+  fetchUserDetails();
+}, [id]);
 
   // Delete a post
   const handleDeletePost = async (postId) => {
