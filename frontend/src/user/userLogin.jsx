@@ -13,19 +13,30 @@ const UserLogin = () => {
       const response = await fetch('https://wjeproject3.onrender.com/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include', // Include cookies
+        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
       if (response.ok) {
-        alert('Login successful!');
-        navigate('/'); // Navigate to homepage or user profile
+        const userResponse = await fetch('https://wjeproject3.onrender.com/api/users/search', {
+          method: 'GET',
+          credentials: 'include', 
+        });
+
+        if (!userResponse.ok) throw new Error('Failed to fetch user details after login');
+        const userData = await userResponse.json();
+
+        setIsLoggedIn(true);
+        setUserInfo(userData[0]); 
+
+        navigate('/home');
       } else {
         setError(data.error || 'Invalid username or password');
       }
-    } catch (error) {
+    } catch (err) {
       setError('An error occurred while logging in.');
+      console.error(err);
     }
   };
 
